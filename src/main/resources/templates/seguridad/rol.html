@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Rol</title>
+        <meta charset="UTF-8"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:include="menu::header">                
+            </nav>
+
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <!-- Navbar content -->
+                <a class="btn btn-info btn-sm"  th:href="@{/rol/showForm}"><span >Agrgar</span></a>
+
+            </nav>
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="table-responsive">
+                        <table  class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ROL</th>
+                                    <th>DESCRIPCION</th>                            
+                                    <th>ESTADO</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="rol : ${listaRol}">
+                                <tr>
+                                    <td th:text="${rol.id}"></td>
+                                    <td th:text="${rol.nombre}"></td>
+                                    <td th:text="${rol.descripcion}"></td>    
+                                    <td >
+                                        <div th:switch="${rol.estado}"> 
+                                            <button th:case="true" type="button" class="btn btn-success btn-sm">Act</button>
+                                            <button th:case="false" type="button" class="btn btn-secondary btn-sm">Des</button>                                    
+                                        </div>                    
+                                    </td> 
+                                    <td>
+                                        <a href="#" th:href="@{/eliminaRol?id=__${rol.id}__}">
+                                            <button type="button" class="btn btn-danger btn-sm"><span class="material-icons">delete</span></button>                                            
+                                        </a>
+                                        <a href="#" th:href="@{/rol/showForm?id=__${rol.id}__}">
+                                            <button type="button" class="btn btn-info btn-sm"><span class="material-icons">edit</span></button>
+                                        </a>
+                                    </td>
+                                </tr> 
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+            </div>
+
+
+
+            <!-- Modal -->
+            <!--            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form action="#" th:action="@{/addRol}" th:object="${rol}" method="post" >
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+            
+                                            <div class="form-group">
+                                                <label for="id_rol">Nombre Rol</label>
+                                                <input type="text" class="form-control" id="id_rol" aria-describedby="rolHelp" placeholder="ROLE_ADMINISTRATOR"  required>
+                                                <small id="rolHelp" class="form-text text-muted">Rol incremenrara la funcionalidad del sistema</small>                                    
+                                                <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error en alias</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-control" id="descripcion" rows="1"  required></textarea>
+                                                <p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Error en alias</p>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>-->
+
+            <!--            <form action="#" th:action="@{/addUser}" th:object="${user}" method="post">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Usuarios</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="staticEmail" th:field="*{alias}" value="email@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">clave</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword" th:field="*{clave}" required>
+                                </div>
+                            </div>
+                            <p>alias <input type="text" th:field="*{alias}" required /></p>
+                            <p th:if="${#fields.hasErrors('alias')}" th:errors="*{alias}">Error en alias</p>
+            
+                            <p>clave <input type="text" th:field="*{clave}" required/></p>
+                            <p th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}">Error en clave</p>
+            
+                            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                        </form>-->
+            <div th:include="pie :: footer"></div>
+        </div>        
+    </body>
+</html>

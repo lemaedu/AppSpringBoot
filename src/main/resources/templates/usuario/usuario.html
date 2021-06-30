@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Usuarios</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">         
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:include="menu::header">                
+            </nav>           
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <!-- Navbar content -->
+                <a class="btn btn-info btn-sm"  th:href="@{/showForm}"><span >Agrgar</span></a>
+            </nav>
+            <div class="table-responsive">
+                <table  class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>ALIAS</th>
+                            <th>CORREO</th>                    
+                            <th>LINK</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="us : ${users}">
+                        <tr>
+                            <td th:text="${us.id}"></td>
+                            <td th:text="${us.username}"></td>    
+                            <td th:text="${us.correo}"></td>  
+                            <td th:text="${us.link}"></td>
+                            <td th:text="${us.estado}"></td> 
+                            <td>
+                                <a href="#" th:href="@{/removeUser?id=__${us.id}__}">
+                                    <button type="button" class="btn btn-danger btn-sm"><span class="material-icons">delete</span></button>
+                                </a>
+                                <a href="#" th:href="@{/showForm?id=__${us.id}__}">
+                                    <button type="button" class="btn btn-info btn-sm"><i class="material-icons">edit</i></button>
+                                </a>
+                            </td>
+                        </tr> 
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <div th:include="pie::footer"></div>
+        </div>
+
+    </body>
+</html>

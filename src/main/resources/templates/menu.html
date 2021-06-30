@@ -1,0 +1,29 @@
+<div class="container-fluid" th:fragment="header">                    
+    <a class="navbar-brand" href="#">[[${#httpServletRequest.remoteUser}]]</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown" th:each="menu : ${session.listaMenu}">
+            <th:block th:if="${!menu.nodoFinal and menu.menu ne null}" >                            
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span th:text="${menu.nombre}"></span>
+                </a>  
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <th:block th:each="subMenu : ${menu.menus}">                                            
+                        <li><a class="dropdown-item" th:href="${subMenu.url}"><span th:text="${subMenu.nombre}"></span></a></li>
+                    </th:block> 
+                </ul>
+            </th:block>
+            </li> 
+        </ul>
+        <form class="d-flex">                            
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <form th:action="@{/logout}" method="POST" class="d-flex">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">LOGOUT</button>
+        </form>
+    </div>
+</div>

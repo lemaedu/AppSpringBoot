@@ -1,0 +1,34 @@
+server:
+    port                        :   8090
+ #Propiedad Spring   
+spring                          :
+    datasource                  :
+        hikari                  :
+            connectionTimeout   :   20000
+            maximumPoolSize     :   5
+        url                     :   jdbc:postgresql://localhost:5432/db_lema
+        username                :   postgres
+        password                :   postgres
+    jpa                         :
+        hibernate               :
+            ddl-auto            :   none
+            naming              : 
+                implicit-strategy : org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        show-sql                :   false
+        database-platform       :   org.hibernate.dialect.PostgreSQL94Dialect
+      
+        properties              :
+            hibernate           : 
+                format_sql      :   true
+                jdbc            :
+                    lob         : 
+                    non_contextual_creation: true
+banner:
+    location: 
+        classpath: banner.txt
+            
+        
+            
+
+            
+    
