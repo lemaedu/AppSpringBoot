@@ -54,12 +54,16 @@ public class MenuController {
             view.setViewName(Vistas.V_FORM_MENU);
         } else {
             view.setViewName(Vistas.V_MENU);
-            if (!menu.getNombre().isEmpty()) {
-                service.crear(menu);
-
+            if (menu.getId() > 0) {
+                service.actualizar(menu);
                 LOGGER.info("TEMPLATE: '" + Vistas.V_MENU + "' --DATA:" + menu.getNombre() + "'");
                 view.addObject("menu", menu);
                 view.addObject("listaMenu", service.obtenerTodos());//variable q se usa en la vista                
+            } else {
+                service.actualizar(menu);
+                LOGGER.info("TEMPLATE: '" + Vistas.V_MENU + "' --DATA:" + menu.getNombre() + "'");
+                view.addObject("menu", menu);
+                view.addObject("listaMenu", service.obtenerTodos());//variable q se usa en la vista 
             }
         }
         return view;
